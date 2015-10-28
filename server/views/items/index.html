@@ -1,0 +1,63 @@
+{% extends '../layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col-xs-4"><h1>{{ title }}</h1></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-4">
+      <p>My List:</p>  
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-4">
+      <ul>
+        {% for item in items %}
+          <li>{{ item.id }}: {{ item.name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-4">
+      <hr/>
+    </div>  
+  </div>
+
+  <h6>To GET an item:</h6>
+  <pre>curl http://localhost:5000/items/[ID]</pre>
+
+  <h6>To CREATE an item (or use the form below):</h6>
+  <pre>curl -X POST -d "name=Milk" http://localhost:5000/items</pre>
+
+  <h6>To UPDATE the name of an item:</h6>
+  <pre>curl -X PUT -d "name=Candy" http://localhost:5000/items/[ID]</pre>
+  
+  <h6>To DELETE an item:</h6>
+  <pre>curl -X DELETE http://localhost:5000/items/[ID]</pre>
+
+  <div class="row">
+    <div class="col-xs-4">
+      <hr/>
+    </div>  
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4">
+      <form method='POST' url='/'>
+        <div class="form-group">
+          <label for='name'>Enter the name of an item:</label>
+          <input autofocus type='text' name='name' class='form-control'>
+          <input type='hidden' name='form-request' value='true'>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
